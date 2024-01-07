@@ -3,6 +3,7 @@ import { View, Text, FlatList,Image } from 'react-native';
 import { Heading, HStack, VStack, Box, Spacer, Avatar,Stack ,AspectRatio,Center} from 'native-base';
 import tw from 'twrnc';
 import image1 from '../assets/images/image1.jpg';
+import ListItem from './ListItem';
 
 export default function ServiceList() {
     const data = [{
@@ -45,63 +46,64 @@ export default function ServiceList() {
     <FlatList
       data={data}
       renderItem={({ item }) => (
-        <Box
-          width="50%" // Set to 50% to have 2 items in a row (for 2 columns)
-          p={1}
-        >
-          <Box
-            maxW="100%"
-            rounded="lg"
-            overflow="hidden"
-            borderColor="coolGray.200"
-            borderWidth={1}
-            _dark={{
-              borderColor: "coolGray.600",
-              bg: "primary.600",
-            }}
-            _web={{
-              shadow: 2,
-              borderWidth: 0,
-            }}
-            _light={{
-              backgroundColor: "gray.50",
-            }}
-          >
-            <Box>
-              {/* <AspectRatio w="100%" ratio={16 / 9}>
-              </AspectRatio> */}
-                <Image source={image1} alt="image" style={tw`h-32 w-full`} />
-              <Center
-                bg="violet.500"
-                _dark={{
-                  bg: "violet.400",
-                }}
-                _text={{
-                  color: "warmGray.50",
-                  fontWeight: "700",
-                  fontSize: "xs",
-                }}
-                position="absolute"
-                bottom={0}
-                px={3}
-                py={1.5}
-              >
-                {item.timeStamp}
-              </Center>
-            </Box>
-            <Stack p={4} space={3}>
-              <Stack space={2}>
-                <Heading size="md" ml={-1}>
-                  {item.fullName}
-                </Heading>
-                <Text fontSize="xs" fontWeight="500" ml={-0.5} mt={-1} style={tw`text-white`} >
-                  The Silicon Valley of India.
-                </Text>
-              </Stack>
-              <Text fontWeight="400"  style={tw`text-white`}>{item.recentText}</Text>
-            </Stack>
-          </Box>
-        </Box>
+        <ListItem  image={image1} time={item.timeStamp} name={item.fullName} header={"The Silicon Valley of India."} desc={item.recentText} />
+        // <Box
+        //   width="50%" // Set to 50% to have 2 items in a row (for 2 columns)
+        //   p={1}
+        // >
+        //   <Box
+        //     maxW="100%"
+        //     rounded="lg"
+        //     overflow="hidden"
+        //     borderColor="coolGray.200"
+        //     borderWidth={1}
+        //     _dark={{
+        //       borderColor: "coolGray.600",
+        //       bg: "#016A70",
+        //     }}
+        //     _web={{
+        //       shadow: 2,
+        //       borderWidth: 0,
+        //     }}
+        //     _light={{
+        //       backgroundColor: "gray.50",
+        //     }}
+        //   >
+        //     <Box>
+        //       {/* <AspectRatio w="100%" ratio={16 / 9}>
+        //       </AspectRatio> */}
+        //         <Image source={image1} alt="image" style={tw`h-32 w-full`} />
+        //       <Center
+        //         bg="violet.500"
+        //         _dark={{
+        //           bg: "primary.500",
+        //         }}
+        //         _text={{
+        //           color: "warmGray.50",
+        //           fontWeight: "700",
+        //           fontSize: "xs",
+        //         }}
+        //         position="absolute"
+        //         bottom={0}
+        //         px={3}
+        //         py={1.5}
+        //       >
+        //         {item.timeStamp}
+        //       </Center>
+        //     </Box>
+        //     <Stack p={4} space={3}>
+        //       <Stack space={2}>
+        //         <Heading size="md" ml={-1}>
+        //           {item.fullName}
+        //         </Heading>
+        //         <Text fontSize="xs" fontWeight="500" ml={-0.5} mt={-1} style={tw`text-white`} >
+        //           The Silicon Valley of India.
+        //         </Text>
+        //       </Stack>
+        //       <Text fontWeight="400"  style={tw`text-white`}>{item.recentText}</Text>
+        //     </Stack>
+        //   </Box>
+        // </Box>
       )}
       keyExtractor={(item) => item.id}
       numColumns={2} // Specify the number of columns

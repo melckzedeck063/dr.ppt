@@ -41,11 +41,12 @@ export default function App({ theme }) {
   return (
     <NativeBaseProvider theme={theme} colorModeManager={colorModeManager}>
       <NavigationContainer>
-        <Drawer.Navigator initialRouteName="Home" headerShown="false" >
+        <Drawer.Navigator initialRouteName="Home"
+             screenOptions={{ drawerPosition: 'left', headerShown: false }} 
+        >
           <Drawer.Screen name='Home' component={HomeScreen} options={{ headerShown: false }} />
           <Drawer.Screen name='Splash' component={SplashScreenComponent} />
           <Drawer.Screen name='LandingStack' component={LandingStack} />
-          {/* <Drawer.Screen name='Landing' component={LandingScreen} options={{ headerShown: false }} /> */}
           <Drawer.Screen name='Login' component={LoginScreen} options={{ headerShown: false }} />
           <Drawer.Screen name='Signup' component={SignupScreen} options={{ headerShown: false }} />
           <Drawer.Screen name='Settings' component={SettingsScreen} />

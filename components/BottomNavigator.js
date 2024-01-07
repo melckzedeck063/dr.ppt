@@ -31,7 +31,7 @@ export const LandingTab = () => {
         headerTintColor: 'white',
         tabBarActiveTintColor: 'orange',
         tabBarInactiveTintColor: 'white',
-        tabBarStyle: { backgroundColor: '#016A70', height: 65 },
+        tabBarStyle: { backgroundColor: '#067242', height: 65 },
         tabBarLabelStyle: { fontSize: 14, padding: 4, height: 30 },
         headerShown: false,
         showLabel: true, // Set to false if you don't want to show labels

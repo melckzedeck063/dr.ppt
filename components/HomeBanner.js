@@ -6,7 +6,7 @@ import image1 from '../assets/images/image1.jpg'
 export default function HomeBanner() {
   return (
     <Center>
-    <Box bg="primary.600" py="4" px="3" borderRadius="5" rounded="md" width={375} maxWidth="100%">
+    <Box bg="green.700" py="4" px="3" borderRadius="5" rounded="md" width={375} maxWidth="100%">
         <HStack justifyContent="space-between">
           <Box justifyContent="space-between">
             <VStack space="2">
@@ -17,7 +17,7 @@ export default function HomeBanner() {
                 Let's talk about avatar!
               </Text>
             </VStack>
-            <Pressable rounded="xs" bg="primary.400" alignSelf="flex-start" py="1" px="3">
+            <Pressable rounded="xs" bg="primary.500" alignSelf="flex-start" py="1" px="3">
               <Text textTransform="uppercase" fontSize="sm" fontWeight="bold" color="white">
                 Remind me
               </Text>

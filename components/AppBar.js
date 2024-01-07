@@ -16,8 +16,8 @@ export default function AppBar({ title, icon }) {
   return (
     <Box style={tw`w-full`}>
       <RNStatusBar backgroundColor="#016A70" barStyle="light-content" />
-      <Box safeAreaTop bg="#016A70" />
-      <HStack bg="#016A70" px="2.5" py="2" style={tw`-mt-4`} justifyContent="space-between" alignItems="center">
+      <Box safeAreaTop bg="green.600" />
+      <HStack bg="green.700" px="2.5" py="3.5" style={tw``} justifyContent="space-between" alignItems="center">
         <HStack alignItems="center">
           <Pressable onPress={toggleDrawer}>
             <MaterialIcons name={icon} size={24} color="white" />

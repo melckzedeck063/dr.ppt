@@ -10,7 +10,7 @@ export default function AppBar2({ title, icon }) {
     <Box style={tw`w-full`}>
       <RNStatusBar backgroundColor="#016A70" barStyle="light-content" />
       <Box safeAreaTop bg="#016A70" />
-      <HStack bg="#016A70" px="2.5" py="3" justifyContent="space-between" alignItems="center">
+      <HStack bg="green.700" px="2.5" py="3" justifyContent="space-between" alignItems="center">
         <HStack alignItems="center">
           <Pressable onPress={() => console.log('Menu button pressed')}>
             <MaterialIcons name={icon} size={24} color="white" />
