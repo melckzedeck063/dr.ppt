@@ -2,8 +2,10 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { NativeBaseProvider } from 'native-base';
+import { NativeBaseProvider, Box, Text, Avatar } from 'native-base'; // Import necessary components from NativeBase
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import tw from 'twrnc';
+import image1 from './assets/images/image1.jpg'
 
 import SplashScreenComponent from './screens/SplashScreen';
 import HomeScreen from './screens/HomeScreen';
@@ -12,6 +14,8 @@ import SignupScreen from './screens/SignupScreen';
 import LandingScreen from './screens/LandingScreen';
 import SettingsScreen from './screens/SettingsScreen';
 import { LandingTab } from './components/BottomNavigator'; // Import your bottom navigator
+import ServiceDetailScreen from './screens/ServiceDetailScreen';
+import CustomDrawer from './components/CustomDrawer';
 
 const Drawer = createDrawerNavigator();
 const Stack = createNativeStackNavigator();
@@ -38,14 +42,27 @@ export default function App({ theme }) {
     },
   };
 
+
   return (
     <NativeBaseProvider theme={theme} colorModeManager={colorModeManager}>
       <NavigationContainer>
-        <Drawer.Navigator initialRouteName="Home"
-             screenOptions={{ drawerPosition: 'left', headerShown: false }} 
+        <Drawer.Navigator
+          drawerContent ={ (props) =>  <CustomDrawer  {...props}  />}
+          initialRouteName="Splash"
+          screenOptions={{
+            drawerPosition: 'left',
+            headerShown: false,
+            drawerStyle: {
+              backgroundColor: 'white', // Set your background color
+              color:"white",
+              width: 240, // Set the width of the drawer
+            },
+
+          }}
+           
         >
-          <Drawer.Screen name='Home' component={HomeScreen} options={{ headerShown: false }} />
           <Drawer.Screen name='Splash' component={SplashScreenComponent} />
+          <Drawer.Screen name='Home' component={HomeScreen} options={{ headerShown: false }} />
           <Drawer.Screen name='LandingStack' component={LandingStack} />
           <Drawer.Screen name='Login' component={LoginScreen} options={{ headerShown: false }} />
           <Drawer.Screen name='Signup' component={SignupScreen} options={{ headerShown: false }} />
@@ -62,6 +79,7 @@ function LandingStack() {
     <Stack.Navigator>
       <Stack.Screen name='LandingTab' component={LandingTab} options={{ headerShown: false }} />
       {/* <Stack.Screen name='Landing' component={LandingScreen} options={{ headerShown: false }} /> */}
+      <Stack.Screen name='ServiceDetail' component={ServiceDetailScreen} options={{ headerShown: false }} />
     </Stack.Navigator>
   );
 }

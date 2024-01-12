@@ -11,6 +11,11 @@ import SettingsScreen from '../screens/SettingsScreen';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { LandingTab } from './BottomNavigator';
 
+import {
+  DrawerContentComponentProps,
+   DrawerContentScrollView ,
+    DrawerItemList
+  } from '@react-navigation/drawer'
 
 const Drawer  =  createDrawerNavigator();
 const Stack =  createNativeStackNavigator();

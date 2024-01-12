@@ -1,66 +1,79 @@
-import { View, Text, Image, TouchableOpacity } from 'react-native'
-import React from 'react'
-import { Box, Center, Heading, Stack } from 'native-base'
+// ... (your other imports)
+import { View, Text, Image, TouchableOpacity } from 'react-native';
+import React from 'react';
+import { Box, Center, Heading, Stack } from 'native-base';
 import tw from 'twrnc';
+import { useNavigation } from '@react-navigation/native';
 
 
-export default function ListItem({image,time,name,header,desc}) {
+export default function ListItem({ image, time, name, header, desc }) {
+  const navigation = useNavigation();
+
   return (
-      <Box width="50%" py={1.5} px={1} >
-        <TouchableOpacity>
-          <Box
-            maxW="100%"
-            rounded="lg"
-            overflow="hidden"
-            borderColor="coolGray.200"
-            borderWidth={1}
-            _dark={{
-              borderColor: "coolGray.600",
-              bg: "#016A70",
-            }}
-            _web={{
-              shadow: 2,
-              borderWidth: 0,
-            }}
-            _light={{
-              backgroundColor: "gray.50",
-            }}
-          >
-            <Box>
-              {/* <AspectRatio w="100%" ratio={16 / 9}>
-              </AspectRatio> */}
-                <Image source={image} alt="image" style={tw`h-32 w-full`} />
-              <Center
-                bg="violet.500"
-                _dark={{
-                  bg: "primary.500",
-                }}
-                _text={{
-                  color: "warmGray.50",
-                  fontWeight: "700",
-                  fontSize: "xs",
-                }}
-                position="absolute"
-                bottom={0}
-                px={3}
-                py={1.5}
-              >
-                {time}
-              </Center>
-            </Box>
-            <Stack p={4} space={3}>
-              <Stack space={2}>
-                <Heading size="md" ml={-1}>
-                  {name}
-                </Heading>
-                <Text fontSize="xs" fontWeight="500" ml={-0.5} mt={-1} style={tw`text-white`} >
-                  {header}
-                </Text>
-              </Stack>
-              <Text fontWeight="400"  style={tw`text-white`}>{desc}</Text>
-            </Stack>
+    <Box py={1.5} px={1} mr={1}>
+      <TouchableOpacity
+        onPress={() =>
+          navigation.navigate('ServiceDetail', {
+            name,
+            image,
+            time,
+            desc,
+          })
+        }
+      >
+        <Box
+          maxW="100%"
+          padding="4"
+          rounded="lg"
+          overflow="hidden"
+          borderColor="coolGray.200"
+          borderWidth={1}
+          bg="rgba(173, 216, 230, 0.2)" // Set a lower opacity for a more transparent background
+          shadow={2} // Apply a slight box shadow
+          _dark={{
+            borderColor: 'coolGray.600',
+            bg: 'rgba(173, 216, 230, 0.2)',
+          }}
+          _light={{
+            backgroundColor: 'rgba(173, 216, 230, 0.2)',
+          }}
+          style={tw`opacity-80`}
+        >
+          <Box>
+            <Image source={image} alt="image" style={tw`h-46 w-46 mx-auto rounded-full`} />
+            <Center
+              bg="violet.500"
+              _dark={{
+                bg: 'primary.500',
+              }}
+              _text={{
+                color: 'black', // Set text color to black
+                fontWeight: '700',
+                fontSize: 'xs',
+              }}
+              position="absolute"
+              bottom={0}
+              px={3}
+              py={1.5}
+            >
+              {time}
+            </Center>
           </Box>
-         </TouchableOpacity>
+          <Stack p={4} space={3}>
+            <Stack space={2}>
+              <Heading size="md" ml={-1} color="black"> {/* Set text color to black */}
+                {name}
+              </Heading>
+              <Text fontSize="xs" fontWeight="500" ml={-0.5} mt={-1} style={tw`text-black`}>
+                {header}
+              </Text>
+            </Stack>
+            <Text fontWeight="400" style={tw`text-black`}>
+              {desc}
+            </Text>
+          </Stack>
         </Box>
-  )
+      </TouchableOpacity>
+    </Box>
+  );
 }

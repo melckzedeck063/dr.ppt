@@ -1,12 +1,12 @@
 import React from 'react';
 import { Box, HStack, VStack, Text, Pressable, Image,Container,Heading,Center } from 'native-base';
-
+import tw from 'twrnc';
 import image1 from '../assets/images/image1.jpg'
 
 export default function HomeBanner() {
   return (
     <Center>
-    <Box bg="green.700" py="4" px="3" borderRadius="5" rounded="md" width={375} maxWidth="100%">
+    <Box bg="green.700" py="4" px="3" borderRadius="5" rounded="md" width={375} maxWidth="100%"  style={tw`opacity-80`} >
         <HStack justifyContent="space-between">
           <Box justifyContent="space-between">
             <VStack space="2">
