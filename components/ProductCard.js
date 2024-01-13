@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, TextInput, StyleSheet, Button } from 'react-native';
+import { HStack } from 'native-base';
 
 import tw from 'twrnc';
 
-const CollapsibleListItem = ({ title, description }) => {
-    title = "Item Component"
-    description = "lorem component to include an item title, description, an input text field"
+const ProductCard = ({title, description}) => {
+    // title = "Hello"
+     description = "lorem component to include an item title, description, an input text field"
   const [isExpanded, setExpanded] = useState(false);
   const [quantity, setQuantity] = useState('1');
+
+  // console.log(props);
 
   const handlePress = () => {
     setExpanded(!isExpanded);
@@ -31,12 +34,20 @@ const CollapsibleListItem = ({ title, description }) => {
       {isExpanded && (
         <View style={styles.content}>
           <Text style={styles.description}>{description}</Text>
+          <HStack>
           <TextInput
             style={styles.input}
             value={quantity}
+            placeholder='Number of rooms'
             onChangeText={handleQuantityChange}
             keyboardType="numeric"
           />
+          <View style={tw`flex-row ml-6`}>
+             <Text style={tw`pt-2 ml-4 text-lg text-green-700 font-bold`} > ({quantity}) </Text>
+             <Text style={tw`pt-2 mx-1 font-bold text-lg`} > Room(s) </Text>
+          </View>
+         
+          </HStack>
           <Button title="Book Service" onPress={handleBookService} />
         </View>
       )}
@@ -75,8 +86,9 @@ const styles = StyleSheet.create({
     borderColor: '#ccc',
     borderRadius: 4,
     padding: 8,
+    width: '50%',
     marginBottom: 8,
   },
 });
 
-export default CollapsibleListItem;
+export default ProductCard;

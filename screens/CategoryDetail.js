@@ -3,15 +3,17 @@ import { View, Text, Image, FlatList } from 'react-native';
 import tw from 'twrnc';
 import image1 from '../assets/images/image2.jpg';
 import AppBar from '../components/AppBar';
-import { Center, Box } from 'native-base';
+import { Center, Box,Fab,AntDesign,Modal,Button } from 'native-base';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import ProductCard from '../components/ProductCard';
 import AppBar2 from '../components/AppBar2';
+import ServiceForm from '../components/ServiceForm';
 
 const data = [
-  { id: '1', label: 'Item 1' },
-  { id: '2', label: 'Item 2' },
-  { id: '3', label: 'Item 3' },
-  { id: '4', label: 'Item 4' },
+  { id: '1', label: 'Entire House' },
+  { id: '2', label: 'Room' },
+  { id: '3', label: 'Sitting Room' },
+  { id: '4', label: 'Dinning Room' },
   { id: '5', label: 'Item 6' },
   { id: '6', label: 'Item 5' },
   { id: '7', label: 'Item 7' },
@@ -19,6 +21,11 @@ const data = [
 
 export default function CategoryDetail({ route }) {
   const { image, name } = route.params;
+
+  const [modalVisible, setModalVisible] = React.useState(false);
+  const initialRef = React.useRef(null);
+  const finalRef = React.useRef(null);
+
 
   return (
     <Box flex={1} height="95%">
@@ -30,6 +37,32 @@ export default function CategoryDetail({ route }) {
 
           {/* Service Details */}
           <View flex={1} style={tw`px-4`} >
+
+          <Modal  isOpen={modalVisible} onClose={() => setModalVisible(false)} initialFocusRef={initialRef} finalFocusRef={finalRef}>
+        <Modal.Content bg="white">
+          <Modal.CloseButton />
+          <Modal.Header bg="white" variant="ghost" style={tw`text-green-700`}>
+            <Text  style={tw`text-green-700 font-bold text-lg`} > Add New Service </Text>
+            </Modal.Header>
+          <Modal.Body>
+            <ServiceForm  />
+          </Modal.Body>
+          {/* <Modal.Footer  bg="white" >
+            <Button.Group space={2} bg="white">
+              <Button variant="ghost"  onPress={() => {
+              setModalVisible(false);
+            }}>
+                Cancel
+              </Button>
+              <Button onPress={() => {
+              setModalVisible(false);
+            }}>
+                Save
+              </Button>
+            </Button.Group>
+          </Modal.Footer> */}
+        </Modal.Content>
+      </Modal>
 
           <View style={tw`mb-3 px-`}>
             <Text style={tw`text-2xl ml-2 font-bold`}>{name}</Text>
@@ -47,7 +80,7 @@ export default function CategoryDetail({ route }) {
             keyExtractor={(item) => item.id}
             renderItem={({ item }) => (
               <Box>{/* style={tw`bg-gray-300 mx-2 rounded-md p-2`} */}
-                <ProductCard />
+                <ProductCard title={item.label}  />
               </Box>
             )}
           />
@@ -62,6 +95,14 @@ export default function CategoryDetail({ route }) {
           </TouchableOpacity> */}
         </Box>
       </View>
+      <Fab renderInPortal={false} shadow={2} size="sm" placement="bottom-right" 
+      // icon={<Icon color="white" as={MaterialIcons} name="lightbulb" size="4" />}
+        icon={<Icon name="plus" size={24} color="white" />}
+        onPress={() => {
+          setModalVisible(!modalVisible);
+        }}
+       />
     </Box>
   );
 }
+
