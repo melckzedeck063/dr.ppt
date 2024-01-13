@@ -10,7 +10,7 @@ import ServiceItem from '../components/ServiceItem';
 
 const ServiceDetailScreen = ({ route }) => {
     
-    const { name, image, time, desc } = route.params;
+    const { name, image, time, desc,category } = route.params;
 
     const data = [
         { id: '1', label: 'Item 1' },
@@ -18,17 +18,17 @@ const ServiceDetailScreen = ({ route }) => {
         { id: '3', label: 'Item 3' },
         { id: '4', label: 'Item 4' },
       ];
-    // console.log(name)
+    // console.log(category)
   return (
     <View>
         <AppBar title={"My Cart"} icon={"arrow-back"} />
         <View style={tw`px-2`}>
             
-    <Box style={tw``}>
+    <Box style={tw`p-3`}>
       {/* Service Image */}
       <Image
         source={image}
-        style={tw`h-72 w-full mb-2 rounded-b-lg`}
+        style={tw`h-64 w-full mb-2 rounded-b-lg`}
         resizeMode="cover"
       />
 
@@ -45,7 +45,7 @@ const ServiceDetailScreen = ({ route }) => {
 
       {/* {add a horizontal flatlist  here with four items} */}
       <FlatList
-        data={data}
+        data={category}
         keyExtractor={(item) => item.id}
         horizontal
         showsHorizontalScrollIndicator={false}
@@ -54,7 +54,7 @@ const ServiceDetailScreen = ({ route }) => {
             // style={tw`bg-gray-300 mx-2 rounded-md p-2`}
             
           >
-            <ServiceItem />
+            <ServiceItem title={item.title} location={item.location} />
           </Box>
         )}
       />

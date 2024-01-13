@@ -1,8 +1,9 @@
 import React from 'react';
-import { ImageBackground, StyleSheet, Text, Image } from 'react-native';
+import { ImageBackground, StyleSheet, Text, Image, TouchableOpacity } from 'react-native';
 import { Box, NativeBaseProvider, Button, StatusBar, Center } from 'native-base';
 
-const backgroundImage = require('../assets/images/image1.jpg'); // Replace with the actual path to your image
+const backgroundImage = require('../assets/images/image1.jpg'); 
+import tw from 'twrnc' // Replace with the actual path to your image
 
 export default function HomeScreen({ navigation }) {
   return (
@@ -20,21 +21,29 @@ export default function HomeScreen({ navigation }) {
             bg="green.700"
             p={5}
             position="absolute"
-            left={1}
-            bottom={-60}
-            borderRadius={100}
+            left={-8}
+            bottom={-110}
+            borderRadius={170}
             height="50%"
             >
             <Center flex={1}  ml={-40} >
-            <Image source={backgroundImage} style={styles.image} />
+            {/* <Image source={backgroundImage} style={styles.image} /> */}
               {/* <Text style={{ fontSize: 18, color: 'black', marginBottom: 20 }}>
                 This is the white container at the bottom.
               </Text> */}
-              <Text style={{ fontSize: 24, color: '#fff', marginBottom: 20 }}>
-                Welcome to Your App!
+              <Text style={{ fontSize: 24, color: '#fff', marginBottom: 20, marginTop : -50 }}>
+                Welcome to DR PPT
               </Text>
-              <Button onPress={() => navigation.navigate('Login')} colorScheme="teal">
-                Login
+              <Text style={{ fontSize: 14, color: '#fff', marginBottom: 3 }}>
+                We provide best cleaning services 
+              </Text>
+              <Text  style={{ fontSize: 14, color: '#fff', marginBottom: 25 }}>
+                 beyond customer expectations
+                 </Text>
+              <Button onPress={() => navigation.navigate('Login')} bg="white"  >
+                <Text style={tw`text-green-600 font-bold`}>
+                  GET STARTED
+                </Text>
               </Button>
             </Center>
             {/* White container at the bottom */}
@@ -56,6 +65,6 @@ const styles = StyleSheet.create({
     width: 120,
     borderRadius : 55,
     resizeMode: 'cover',
-    marginTop : -10 // or 'stretch'
+    marginTop : -40 // or 'stretch'
   },
 });

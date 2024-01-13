@@ -16,6 +16,7 @@ import SettingsScreen from './screens/SettingsScreen';
 import { LandingTab } from './components/BottomNavigator'; // Import your bottom navigator
 import ServiceDetailScreen from './screens/ServiceDetailScreen';
 import CustomDrawer from './components/CustomDrawer';
+import CategoryDetail from './screens/CategoryDetail';
 
 const Drawer = createDrawerNavigator();
 const Stack = createNativeStackNavigator();
@@ -80,6 +81,7 @@ function LandingStack() {
       <Stack.Screen name='LandingTab' component={LandingTab} options={{ headerShown: false }} />
       {/* <Stack.Screen name='Landing' component={LandingScreen} options={{ headerShown: false }} /> */}
       <Stack.Screen name='ServiceDetail' component={ServiceDetailScreen} options={{ headerShown: false }} />
+      <Stack.Screen  name='Category'  component={CategoryDetail}  options={{headerShown : false}}  />
     </Stack.Navigator>
   );
 }

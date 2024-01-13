@@ -4,14 +4,23 @@ import { TouchableOpacity, Image } from 'react-native';
 import { Box, Center, Stack, Heading, Text } from 'native-base';
 import image1 from '../assets/images/image1.jpg';
 import tw from 'twrnc';
+import { useNavigation } from '@react-navigation/native';
 
-export default function ServiceItem() {
+export default function ServiceItem({title,location}) {
+
+  const navigation =  useNavigation();
+
+  // console.log(title);
   return (
     <Box width={240}
         //  height={100} 
          mx={1} py={1.5} px={1} 
          >
-      <TouchableOpacity>
+      <TouchableOpacity 
+        onPress={() => navigation.navigate("Category", {
+          image : image1
+        })}
+      >
         <Box
           maxW="100%"
           rounded="lg"
@@ -50,10 +59,10 @@ export default function ServiceItem() {
               Title
             </Center>
           </Box>
-          <Stack p={4} space={3}>
+          <Stack px={4} py={8} space={3}>
             <Stack space={2}>
               <Heading size="md" ml={-1}>
-                Service Title
+                {title}
               </Heading>
             </Stack>
             <Text fontWeight="400" style={tw`text-white text-sm`}>

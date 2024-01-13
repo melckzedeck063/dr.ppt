@@ -12,7 +12,7 @@ export default function LoginScreen({ navigation }) {
       <AppBar2 title="Login" icon={"arrow-back"} />
       <Box style={tw`w-full h-full`} bg="white">
         <Center w="100%">
-          <Box safeArea p="2" py="12" w="90%" maxW="320" bg="">
+          <Box safeArea p="2" py="32" w="90%" maxW="320" bg="">
             {/* Set background color to green */}
             <Heading size="lg" fontWeight="600" color="#016A70" _dark={{ color: "#016A70" }}>
               Welcome

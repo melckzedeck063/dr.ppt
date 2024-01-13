@@ -6,7 +6,7 @@ import tw from 'twrnc';
 import { useNavigation } from '@react-navigation/native';
 
 
-export default function ListItem({ image, time, name, header, desc }) {
+export default function ListItem({ image, time, name, header, desc, category }) {
   const navigation = useNavigation();
 
   return (
@@ -18,36 +18,38 @@ export default function ListItem({ image, time, name, header, desc }) {
             image,
             time,
             desc,
+            category
           })
         }
       >
-        <Box
+       <Box
           maxW="100%"
           padding="4"
           rounded="lg"
           overflow="hidden"
           borderColor="coolGray.200"
           borderWidth={1}
-          bg="rgba(173, 216, 230, 0.2)" // Set a lower opacity for a more transparent background
-          shadow={2} // Apply a slight box shadow
+           // Deeper green color with transparency
+          shadow={1} // Apply a slight box shadow
           _dark={{
-            borderColor: 'coolGray.600',
-            bg: 'rgba(173, 216, 230, 0.2)',
+            borderColor: 'coolGray.100',
+            bg: '#016A70'
           }}
           _light={{
-            backgroundColor: 'rgba(173, 216, 230, 0.2)',
+            backgroundColor: '#016A70',
           }}
-          style={tw`opacity-80`}
+          style={tw`opacity-100`}
         >
           <Box>
             <Image source={image} alt="image" style={tw`h-46 w-46 mx-auto rounded-full`} />
+            
             <Center
               bg="violet.500"
               _dark={{
                 bg: 'primary.500',
               }}
               _text={{
-                color: 'black', // Set text color to black
+                color: 'white', // Set text color to black
                 fontWeight: '700',
                 fontSize: 'xs',
               }}
@@ -61,14 +63,14 @@ export default function ListItem({ image, time, name, header, desc }) {
           </Box>
           <Stack p={4} space={3}>
             <Stack space={2}>
-              <Heading size="md" ml={-1} color="black"> {/* Set text color to black */}
+              <Heading size="md" ml={-1} color="white"> {/* Set text color to black */}
                 {name}
               </Heading>
-              <Text fontSize="xs" fontWeight="500" ml={-0.5} mt={-1} style={tw`text-black`}>
+              <Text fontSize="xs" fontWeight="500" ml={-0.5} mt={-1} style={tw`text-white`}>
                 {header}
               </Text>
             </Stack>
-            <Text fontWeight="400" style={tw`text-black`}>
+            <Text fontWeight="400" style={tw`text-white`}>
               {desc}
             </Text>
           </Stack>
