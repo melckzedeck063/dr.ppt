@@ -1,7 +1,8 @@
-import { View, Text } from 'react-native'
+import { View, Text,Platform } from 'react-native'
 import React from 'react'
-import { Button, FormControl, Input, VStack } from 'native-base';
-
+import { Button, FormControl, Input, KeyboardAvoidingView, VStack,HStack, Box } from 'native-base';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import tw from 'twrnc'
 
 export default function ServiceForm() {
     const [formData, setData] = React.useState({});
@@ -42,8 +43,12 @@ export default function ServiceForm() {
       validate() ? console.log('Submitted') : console.log('Validation Failed');
     };
   
-    return ( <VStack width="90%" mx="3" maxW="300px" bg="white" p={1}>
-        <FormControl isRequired isInvalid={'name' in errors}>
+    return ( 
+<>
+      
+      {/* <Box width="49%" mx="1" maxW="300px" bg="white"> */}
+        <View style={tw`flex-row justify-between`} >
+        <FormControl isRequired isInvalid={'name' in errors} mx="0.5" width="47%" >
           <FormControl.Label _text={{
           bold: true
         }}>Service Name</FormControl.Label>
@@ -54,8 +59,22 @@ export default function ServiceForm() {
               Name should contain atleast 3 character.
             </FormControl.HelperText>}
         </FormControl>
+
+        <FormControl isRequired isInvalid={'price' in errors}  width="47%"  >
+          <FormControl.Label _text={{
+          bold: true
+        }}>Price</FormControl.Label>
+          <Input placeholder="" color="black" onChangeText={value => setData({ ...formData,
+          price: value
+        })} />
+          {'desc' in errors ? <FormControl.ErrorMessage>Error</FormControl.ErrorMessage> : <FormControl.HelperText>
+              Name should contain atleast 3 character.
+            </FormControl.HelperText>}
+        </FormControl>
+
+        </View>
         
-        <FormControl isRequired isInvalid={'desc' in errors}>
+        <FormControl isRequired isInvalid={'desc' in errors} width="96%" >
           <FormControl.Label _text={{
           bold: true
         }}>Description</FormControl.Label>
@@ -66,10 +85,12 @@ export default function ServiceForm() {
               Name should contain atleast 3 character.
             </FormControl.HelperText>}
         </FormControl>
+
         <Button onPress={onSubmit} mt="5" colorScheme="cyan">
           Submit
         </Button>
-      </VStack>
+      {/* </Box> */}
+      </>
     )
 }
   

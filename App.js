@@ -62,8 +62,8 @@ export default function App({ theme }) {
           }}
            
         >
-          <Drawer.Screen name='Splash' component={SplashScreenComponent} />
-          <Drawer.Screen name='Home' component={HomeScreen} options={{ headerShown: false }} />
+          <Stack.Screen name='Splash' component={SplashScreenComponent} />
+          <Stack.Screen name='Home' component={HomeScreen} options={{ headerShown: false }} />
           <Drawer.Screen name='LandingStack' component={LandingStack} />
           <Drawer.Screen name='Login' component={LoginScreen} options={{ headerShown: false }} />
           <Drawer.Screen name='Signup' component={SignupScreen} options={{ headerShown: false }} />
@@ -82,6 +82,10 @@ function LandingStack() {
       {/* <Stack.Screen name='Landing' component={LandingScreen} options={{ headerShown: false }} /> */}
       <Stack.Screen name='ServiceDetail' component={ServiceDetailScreen} options={{ headerShown: false }} />
       <Stack.Screen  name='Category'  component={CategoryDetail}  options={{headerShown : false}}  />
+      <Stack.Screen name='Splash' component={SplashScreenComponent} />
+      <Stack.Screen name='Home' component={HomeScreen} options={{ headerShown: false }} />
+      <Stack.Screen name='Login' component={LoginScreen} options={{ headerShown: false }} />
+      <Stack.Screen name='Signup' component={SignupScreen} options={{ headerShown: false }} />
     </Stack.Navigator>
   );
 }

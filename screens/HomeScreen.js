@@ -2,7 +2,7 @@ import React from 'react';
 import { ImageBackground, StyleSheet, Text, Image, TouchableOpacity } from 'react-native';
 import { Box, NativeBaseProvider, Button, StatusBar, Center } from 'native-base';
 
-const backgroundImage = require('../assets/images/image1.jpg'); 
+const backgroundImage = require('../assets/images/image3.jpg'); 
 import tw from 'twrnc' // Replace with the actual path to your image
 
 export default function HomeScreen({ navigation }) {
