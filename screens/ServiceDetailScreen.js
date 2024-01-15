@@ -7,6 +7,7 @@ import AppBar from '../components/AppBar';
 
 import { Center, Box } from 'native-base';
 import ServiceItem from '../components/ServiceItem';
+import AppBar2 from '../components/AppBar2';
 
 const ServiceDetailScreen = ({ route }) => {
     
@@ -21,7 +22,7 @@ const ServiceDetailScreen = ({ route }) => {
     // console.log(category)
   return (
     <View>
-        <AppBar title={"My Cart"} icon={"arrow-back"} />
+        <AppBar2 title={"Category"} icon={"arrow-back"} />
         <View style={tw`px-2`}>
             
     <Box style={tw`p-3`}>

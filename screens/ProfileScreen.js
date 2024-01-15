@@ -11,6 +11,7 @@ import { useState } from 'react';
 // import { getLogedUser } from '../store/reduxStore/reducers/userActions';
 import { responsiveFontSize } from 'react-native-responsive-dimensions';
 import tw from 'twrnc';
+import AppBar2 from '../components/AppBar2';
 
 const MyProfile = () => {
 
@@ -49,29 +50,32 @@ const MyProfile = () => {
 
   return (
     <View style={tw`bg-slate-900 h-full`}>
+      <AppBar2 title={"Update Profile"} icon={"arrow-back"} />
         <KeyboardAwareScrollView style={tw`h-full bg-slate-100`}>
         <SafeAreaView  />
 
    <View style={tw`w-full h-full bg-slate-100 mt-3 ${Platform.select({ios : 'py-12', android : 'py-12'})}`}>
-     <View style={{alignSelf : 'center', backgroundColor : '#1c4966' }} className="bg-slate-700 shadow-md rounded-lg px-4 py-5 w-10/12 my-3">
+     <View  style={tw`bg-white mx-auto shadow-md rounded-lg px-10 py-8 w-10/12 my-6`}>
     <View className="">
            {/* <Text className="text-2xl font-medium text-orange-400 text-center my-2" >User Profile</Text>  */}
-           <View style={{alignSelf : 'center', borderWidth : 2}} className="p-0.5 border-sky-400 rounded-full bg-sky-500">
-             <Image  source={image2} style={tw`overflow-hidden h-32 w-32 rounded-full`} />
+           <View  style={`p-0.5 border-sky-400 mx-auto rounded-full bg-sky-500 `}>
+             <Image  source={image2} style={tw`overflow-hidden mx-auto h-32 w-32  rounded-full`} />
            </View>
           </View>
           
-          <View className="my-1" >
+          <View className="my-3" >
           </View>
-       <View className="my-2">
-       <Text className="text-lg text-slate-200" >FirstName</Text>
+       <View className="my-6">
+       <Text style={tw`text-lg text-slate-700`} >FirstName</Text>
         <Controller
+
+        style={tw`border border-slate-500`}
         control={control}
         rules={{
          required: {value : true, message : "Firstname is required"},
         }}
         render={({ field: { onChange, onBlur, value } }) => (
-          <TextInput  className={`rounded-md bg-slate-500 text-white px-4 py-3 capitalize ${errors.firstName? 'border-2 border-red-400' : ''}`}
+          <TextInput  style={tw`rounded-md bg-slate-100 text-slate-800 px-4 border py-3 capitalize ${errors.firstName? 'border-2 border-red-400' : ''}`}
           placeholder="Enter firstName"
             onBlur={onBlur}
             onChangeText={onChange}
@@ -83,7 +87,7 @@ const MyProfile = () => {
       {  errors.firstName && <Text className="text-red-500" > {errors.firstName.message} </Text>}
       </View>
       <View className="my-2">
-      <Text className="text-lg text-slate-200" >LastName</Text>
+      <Text style={tw`text-lg text-slate-700`} >LastName</Text>
     <Controller
         control={control}
         rules={{
@@ -91,7 +95,7 @@ const MyProfile = () => {
           minLength : {value : 3,  message : "Requires atleast three characters"}
         }}
         render={({ field: { onChange, onBlur, value } }) => (
-          <TextInput  className={`rounded-md bg-slate-500 text-white px-4 py-3 capitalize ${errors.lastName? 'border-2 border-red-400' : ''}`}
+          <TextInput  style={tw`rounded-md bg-slate-100 text-slate-800 border border-slate-500 px-4 py-3 capitalize ${errors.lastName? 'border-2 border-red-400' : ''}`}
           placeholder="Enter lastName"
             onBlur={onBlur}
             onChangeText={onChange}
@@ -103,7 +107,7 @@ const MyProfile = () => {
       {  errors.lastName && <Text className="text-red-500" > {errors.lastName.message} </Text>}
       </View>
       <View className="my-2">
-      <Text className="text-lg text-slate-200" >Username</Text>
+      <Text style={tw`text-lg text-slate-700`} >Username</Text>
      <Controller
         control={control}
         rules={{
@@ -114,7 +118,7 @@ const MyProfile = () => {
           }
         }}
         render={({ field: { onChange, onBlur, value } }) => (
-          <TextInput  className={`rounded-md bg-slate-500 text-white px-4 py-3 ${errors.username? 'border-2 border-red-400' : ''}`}
+          <TextInput  style={tw`rounded-md bg-slate-100 text-slate-800 border border-slate-500 px-4 py-3 ${errors.username? 'border-2 border-red-400' : ''}`}
           placeholder="Enter username or email"
             onBlur={onBlur}
             autoCapitalize = {false}
@@ -127,14 +131,14 @@ const MyProfile = () => {
       {  errors.username && <Text className="text-red-500" > {errors.username.message} </Text>}
       </View>
                   <View className="my-2">
-                  <Text className="text-lg text-slate-200" >Telephone</Text>
+                  <Text className={tw`text-lg text-slate-200`} >Telephone</Text>
                   <Controller
         control={control}
         rules={{
          required: "Telephone is  required",
         }}
         render={({ field: { onChange, onBlur, value } }) => (
-          <TextInput  className={`rounded-md bg-slate-500 text-white px-4 py-3 ${errors.telephone? 'border-2 border-red-400' : ''}`}
+          <TextInput  style={tw`rounded-md bg-slate-100 border border-slate-500 text-slate-800 px-4 py-3 ${errors.telephone? 'border-2 border-red-400' : ''}`}
           placeholder="Enter telephone"
             onBlur={onBlur}
             onChangeText={onChange}
@@ -145,36 +149,12 @@ const MyProfile = () => {
       />
       {  errors.telephone && <Text className="text-red-500" > {errors.telephone.message} </Text>}
             </View> 
-      {/* <View className="my-2">
-       <Text className="text-lg text-slate-200" > User Role </Text>
-       <Controller
-        control={control}
-        rules={{
-          required: {value : true, message :  "user_role is required"},
-          pattern: {
-            value: /^([a-zA-Z0-9]{2,16})$/,
-            message: 'user role is required'
-          }
-        }}
-        render={({ field: { onChange, onBlur, value } }) => (
-          <TextInput  className={`rounded-md bg-slate-500 text-white px-4 py-3 capitalize ${errors.user_role? 'border-2 border-red-400' : ''}`}
-          placeholder="Enter user_role"
-            onBlur={onBlur}
-            autoCapitalize={false}
-            onChangeText={onChange}
-            value={value}
-          />
-        )}
-        name="user_role"
-      />
-      {errors.user_role && <Text className="text-red-500"> {errors.user_role.message} </Text>}
-                  </View> */}
                  
          <View>
-             <TouchableOpacity className="bg-orange-400 rounded-md px-2 py-1 my-3"
+             <TouchableOpacity style={tw`bg-green-700 rounded-md px-2 py-2 mt-5`}
                onPress={handleSubmit(onSubmit)}
              >
-                <Text style={{fontSize :  responsiveFontSize(2)}} className="font-medium text-white text-center" > Update </Text>
+                <Text style={tw`font-medium text-lg text-white text-center`} > Update </Text>
              </TouchableOpacity>
         </View>
         </View>

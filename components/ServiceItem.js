@@ -36,7 +36,7 @@ export default function ServiceItem({title,location}) {
             borderWidth: 0,
           }}
           _light={{
-            backgroundColor: "gray.50",
+            backgroundColor: "#016A70",
           }}
         >
           <Box>
@@ -61,7 +61,7 @@ export default function ServiceItem({title,location}) {
           </Box>
           <Stack px={4} py={8} space={3}>
             <Stack space={2}>
-              <Heading size="md" ml={-1}>
+              <Heading size="md" ml={-1} color="white">
                 {title}
               </Heading>
             </Stack>

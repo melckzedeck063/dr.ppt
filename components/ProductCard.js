@@ -9,6 +9,7 @@ const ProductCard = ({title, description}) => {
      description = "lorem component to include an item title, description, an input text field"
   const [isExpanded, setExpanded] = useState(false);
   const [quantity, setQuantity] = useState('1');
+  const [price, setprice] =  useState(25000);
 
   // console.log(props);
 
@@ -46,8 +47,13 @@ const ProductCard = ({title, description}) => {
              <Text style={tw`pt-2 ml-4 text-lg text-green-700 font-bold`} > ({quantity}) </Text>
              <Text style={tw`pt-2 mx-1 font-bold text-lg`} > Room(s) </Text>
           </View>
-         
           </HStack>
+          {/* <HStack> */}
+              <View style={tw`flex-row justify-between  mb-2`}>
+                 <Text style={tw`pt-2 text-lg text-green-700 font-bold`} > Total cost </Text>
+                 <Text style={tw`pt-2 mx-1 font-bold text-lg`} > {(price) * (quantity)} </Text>
+              </View>
+          {/* </HStack> */}
           <Button title="Book Service" onPress={handleBookService} />
         </View>
       )}

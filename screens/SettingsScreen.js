@@ -51,8 +51,9 @@ const SettingsScreen = () => {
   //   })
 
   return (
-    <ScrollView style={styles.container} className="-mt-4 bg-gray-200">
+      <View style={tw`h-full w-full`}>
       <AppBar title={"My Cart"} icon={"arrow-back"} />
+    <ScrollView style={styles.container} className="-mt-4 bg-gray-200 px-2">
       <View style={styles.content}>
         <View style={styles.section}>
           <Text style={styles.sectionTitle} className={`${Platform.select({android : '-mt-2'})}`}>Account</Text>
@@ -62,7 +63,9 @@ const SettingsScreen = () => {
             <Text style={styles.itemText} className={`text-white text-sm ${Platform.select({android : 'text-xs'})}`}>Edit Profile</Text>
             <Ionicons name="arrow-forward" size={20} color="#ccc" />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.item}>
+          <TouchableOpacity style={styles.item}
+             onPress={() => navigation.navigate('changePin')}
+          >
             <Text style={styles.itemText} className={`text-white text-sm ${Platform.select({android : 'text-xs'})}`}>Change Password</Text>
             <Ionicons name="arrow-forward" size={20} color="#ccc" />
           </TouchableOpacity>
@@ -108,6 +111,7 @@ const SettingsScreen = () => {
         </TouchableOpacity> */}
       </View>
     </ScrollView>
+      </View>
   );
 };
 

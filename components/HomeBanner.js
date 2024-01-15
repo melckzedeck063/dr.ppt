@@ -14,7 +14,7 @@ export default function HomeBanner() {
                 Today @ 9PM
               </Text>
               <Text color="white" fontSize="xl">
-                Let's talk about avatar!
+                All about cleanliness!
               </Text>
             </VStack>
             <Pressable rounded="xs" bg="primary.500" alignSelf="flex-start" py="1" px="3">
