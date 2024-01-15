@@ -10,20 +10,20 @@ import React from 'react'
 import tw from 'twrnc'
 import { Box, Center } from 'native-base';
 
-export default function CustomDrawer(props) {
+export default function CustomDrawer() {
   return (
-    <DrawerContentScrollView {...props} >
+    <View style={tw`mb-8`}>
 
         <Center style={styles.drawerHeader} >
             <Image 
             source={image1} 
             style={styles.drawerImage}
               />
-              <Text>admin@drppt.go.tz</Text>
+              <Text style={tw`text-green-700 font-bold my-2`} >admin@drppt.go.tz</Text>
         </Center>
 
-        <DrawerItemList  {...props} />
-    </DrawerContentScrollView>
+        {/* <DrawerItemList  {...props} /> */}
+    </View>
   )
 }
 

@@ -17,6 +17,8 @@ import { LandingTab } from './components/BottomNavigator'; // Import your bottom
 import ServiceDetailScreen from './screens/ServiceDetailScreen';
 import CustomDrawer from './components/CustomDrawer';
 import CategoryDetail from './screens/CategoryDetail';
+import MyProfile from './screens/ProfileScreen';
+import UserDetailsScreen from './screens/UserDetailScreen';
 
 const Drawer = createDrawerNavigator();
 const Stack = createNativeStackNavigator();
@@ -45,8 +47,47 @@ export default function App({ theme }) {
 
 
   return (
-    <NativeBaseProvider theme={theme} colorModeManager={colorModeManager}>
+    <NativeBaseProvider>
       <NavigationContainer>
+       <Stack.Navigator>
+      <Stack.Screen name='Splash' component={SplashScreenComponent} options={{ headerShown: false }} />
+      <Stack.Screen name='Home' component={HomeScreen} options={{ headerShown: false }} />
+      <Stack.Screen  name='Category'  component={CategoryDetail}  options={{headerShown : false}}  />
+       <Stack.Screen name='LandingStack' component={LandingStack} options={{ headerShown: false }} />
+      <Stack.Screen name='ServiceDetail' component={ServiceDetailScreen} options={{ headerShown: false }} />
+      <Stack.Screen name='Login' component={LoginScreen} options={{ headerShown: false }} />
+      <Stack.Screen name='Signup' component={SignupScreen} options={{ headerShown: false }} />
+      <Stack.Screen name='Settings' component={SettingsScreen}  options={{headerShown : false}}   />
+      <Stack.Screen name='EditProfile' component={MyProfile}  options={{headerShown : false}}   />
+      <Stack.Screen name='Profile' component={UserDetailsScreen}  options={{headerShown : false}}   />
+    </Stack.Navigator>
+      </NavigationContainer>
+    </NativeBaseProvider>
+  );
+}
+
+// Stack navigator for LandingScreen and its children (including LandingTab)
+function LandingStack() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name='LandingTab' component={LandingTab} options={{ headerShown: false }} />
+      {/* <Stack.Screen name='Landing' component={LandingScreen} options={{ headerShown: false }} /> */}
+      {/* <Stack.Screen name='ServiceDetail' component={ServiceDetailScreen} options={{ headerShown: false }} />
+      <Stack.Screen  name='Category'  component={CategoryDetail}  options={{headerShown : false}}  />
+      <Stack.Screen name='Splash' component={SplashScreenComponent} />
+      <Stack.Screen name='Home' component={HomeScreen} options={{ headerShown: false }} />
+      <Stack.Screen name='Login' component={LoginScreen} options={{ headerShown: false }} />
+      <Stack.Screen name='Signup' component={SignupScreen} options={{ headerShown: false }} /> */}
+      <Stack.Screen name='Drawer' component={SideNav} options={{headerShown : false}}  />
+    </Stack.Navigator>
+  );
+}
+
+
+function SideNav() {
+  return (
+    <NativeBaseProvider>
+        <NavigationContainer>
         <Drawer.Navigator
           drawerContent ={ (props) =>  <CustomDrawer  {...props}  />}
           initialRouteName="Splash"
@@ -62,30 +103,13 @@ export default function App({ theme }) {
           }}
            
         >
-          <Stack.Screen name='Splash' component={SplashScreenComponent} />
-          <Stack.Screen name='Home' component={HomeScreen} options={{ headerShown: false }} />
+          
           <Drawer.Screen name='LandingStack' component={LandingStack} />
-          <Drawer.Screen name='Login' component={LoginScreen} options={{ headerShown: false }} />
-          <Drawer.Screen name='Signup' component={SignupScreen} options={{ headerShown: false }} />
+          {/* <Drawer.Screen name='Login' component={LoginScreen} options={{ headerShown: false }} />
+          <Drawer.Screen name='Signup' component={SignupScreen} options={{ headerShown: false }} /> */}
           <Drawer.Screen name='Settings' component={SettingsScreen} />
         </Drawer.Navigator>
       </NavigationContainer>
     </NativeBaseProvider>
-  );
-}
-
-// Stack navigator for LandingScreen and its children (including LandingTab)
-function LandingStack() {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen name='LandingTab' component={LandingTab} options={{ headerShown: false }} />
-      {/* <Stack.Screen name='Landing' component={LandingScreen} options={{ headerShown: false }} /> */}
-      <Stack.Screen name='ServiceDetail' component={ServiceDetailScreen} options={{ headerShown: false }} />
-      <Stack.Screen  name='Category'  component={CategoryDetail}  options={{headerShown : false}}  />
-      <Stack.Screen name='Splash' component={SplashScreenComponent} />
-      <Stack.Screen name='Home' component={HomeScreen} options={{ headerShown: false }} />
-      <Stack.Screen name='Login' component={LoginScreen} options={{ headerShown: false }} />
-      <Stack.Screen name='Signup' component={SignupScreen} options={{ headerShown: false }} />
-    </Stack.Navigator>
-  );
+  )
 }

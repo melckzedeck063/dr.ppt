@@ -6,12 +6,13 @@ import { useNavigation } from '@react-navigation/native';
 
 import tw from 'twrnc';
 
-export default function AppBar({ title, icon }) {
+export default function AppBar({ title, icon,toggleDrawer }) {
   const navigation = useNavigation();
 
-  const toggleDrawer = () => {
-    navigation.toggleDrawer();
-  };
+  const handleDrawer = () => {
+    toggleDrawer();
+    // console.log("menu button clicked");
+  }
 
   return (
     <Box style={tw`w-full`}>
@@ -19,7 +20,7 @@ export default function AppBar({ title, icon }) {
       <Box safeAreaTop bg="green.600" />
       <HStack bg="green.700" px="2.5" py="3.5" style={tw``} justifyContent="space-between" alignItems="center">
         <HStack alignItems="center">
-          <Pressable onPress={toggleDrawer}>
+          <Pressable onPress={handleDrawer}>
             <MaterialIcons name={icon} size={24} color="white" />
           </Pressable>
           <Text color="white" fontSize="26" fontWeight="bold" style={tw`text-white ml-2 font-bold`}>
