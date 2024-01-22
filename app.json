@@ -1,6 +1,14 @@
 {
   "expo": {
-    "name": "dr.ppt",
-    "slug": "dr.ppt"
+    "name": "dr-ppt",
+    "slug": "dr-ppt",
+    "extra": {
+      "eas": {
+        "projectId": "637bc966-7b64-457d-b5a6-0978a5d448fc"
+      }
+    },
+    "android": {
+      "package": "com.melckzedeck063.drppt"
+    }
   }
 }

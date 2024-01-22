@@ -54,7 +54,7 @@ export default function LoginScreen({ navigation }) {
                   style={tw`bg-green-600 rounded-md mx-1 px-2 py-1.5`}
                   onPress={() => navigation.navigate("Signup")}
                 >
-                  <Text style={tw`font-normal`}> Sign Up </Text>
+                  <Text style={tw`font-medium text-white`}> Sign Up </Text>
                 </TouchableOpacity>
               </HStack>
             </VStack>

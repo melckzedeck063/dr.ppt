@@ -20,6 +20,7 @@ import CategoryDetail from './screens/CategoryDetail';
 import MyProfile from './screens/ProfileScreen';
 import UserDetailsScreen from './screens/UserDetailScreen';
 import ChangePassword from './screens/ChangePassword';
+import BookingScreen from './screens/BookingScreen';
 
 const Drawer = createDrawerNavigator();
 const Stack = createNativeStackNavigator();
@@ -62,6 +63,7 @@ export default function App({ theme }) {
       <Stack.Screen name='EditProfile' component={MyProfile}  options={{headerShown : false}}   />
       <Stack.Screen name='Profile' component={UserDetailsScreen}  options={{headerShown : false}}  />
       <Stack.Screen  name="changePin" component={ChangePassword} options={{headerShown :  false}}  />
+      <Stack.Screen name='Booking' component={BookingScreen}  options={{headerShown :  false}}  />
     </Stack.Navigator>
       </NavigationContainer>
     </NativeBaseProvider>

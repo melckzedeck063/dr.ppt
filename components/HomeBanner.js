@@ -11,15 +11,15 @@ export default function HomeBanner() {
           <Box justifyContent="space-between">
             <VStack space="2">
               <Text fontSize="sm" color="white">
-                Today @ 9PM
+                Welcome!
               </Text>
               <Text color="white" fontSize="xl">
-                All about cleanliness!
+                Need our service today
               </Text>
             </VStack>
             <Pressable rounded="xs" bg="primary.500" alignSelf="flex-start" py="1" px="3">
               <Text textTransform="uppercase" fontSize="sm" fontWeight="bold" color="white">
-                Remind me
+                Book Now
               </Text>
             </Pressable>
           </Box>

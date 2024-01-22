@@ -10,7 +10,7 @@ export default function SignupScreen({ navigation }) {
       <Box style={tw`bg-white w-full h-full`}>
         <AppBar2 title={'Signup'} icon="arrow-back" />
         <Center w="100%">
-          <Box safeArea p="2" w="90%" maxW="340" py="5">
+          <Box safeArea p="2" w="90%" maxW="340" py="10">
             <Heading size="lg" color="#016A70" _dark={{ color: '#016A70' }} fontWeight="semibold">
               Welcome
             </Heading>
