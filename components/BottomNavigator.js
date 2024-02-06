@@ -6,6 +6,8 @@ import LandingScreen from '../screens/LandingScreen';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import CartScreen from '../screens/CartScreen';
 import { useNavigation } from '@react-navigation/native';
+import FavouriteScreen from '../screens/FavouriteScreen';
+import ProfileScreen  from '../screens/ProfileScreen'
 
 const Tab = createBottomTabNavigator();
 
@@ -86,6 +88,30 @@ export const LandingTab = () => {
           ),
         })}
       />
+
+<Tab.Screen
+        name="Favourites"
+        component={FavouriteScreen}
+        options={{
+          tabBarLabel: 'Favourites',
+          headerShown: false,
+          tabBarIcon: ({ color, size }) => (
+            <Icon name="heart" size={size} color={color} />
+          ),
+        }}
+        listeners={({ navigation, route }) => ({
+          tabBarButton: (props) => (
+            <CustomTabBarButton
+              onPress={() => {
+                props.onPress();
+                // Add your custom animation logic here
+              }}
+            >
+              {props.children}
+            </CustomTabBarButton>
+          ),
+        })}
+      />
       
       <Tab.Screen
         name="SettingsScreen"
@@ -110,6 +136,31 @@ export const LandingTab = () => {
           ),
         })}
       />
+
+{/* <Tab.Screen
+        name="Profile"
+        component={ProfileScreen}
+        options={{
+          tabBarLabel: 'Profile',
+          headerShown: false,
+          tabBarIcon: ({ color, size }) => (
+            <Icon name="cog" size={size} color={color} />
+          ),
+        }}
+        listeners={({ navigation, route }) => ({
+          tabBarButton: (props) => (
+            <CustomTabBarButton
+              onPress={() => {
+                props.onPress();
+                // Add your custom animation logic here
+              }}
+            >
+              {props.children}
+            </CustomTabBarButton>
+          ),
+        })}
+      /> */}
+
     </Tab.Navigator>
   );
 };

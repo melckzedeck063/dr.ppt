@@ -1,16 +1,13 @@
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import React from 'react';
 import { useNavigation } from '@react-navigation/core';
-import { Box, Center } from 'native-base';
-import tw from 'twrnc'
 
-export default function ListItem({ image, name, onPress }) {
+export default function CategoryItem({ image, name, onPress }) {
 
     const navigation =  useNavigation();
   return (
-    
     <TouchableOpacity
-      style={[styles.gridColumn]}
+      style={[styles.gridColumn, { backgroundColor: '#0B666A' }]}
         // Call the onPress function with the selected category name
         onPress={() =>
             navigation.navigate('ServiceDetail', {
@@ -23,10 +20,8 @@ export default function ListItem({ image, name, onPress }) {
           }
 
     >
-      <Center bg="#0B666A" style={tw`h-full w-full mx-auto opacity-80`}>
       <Image source={image} style={styles.serviceImage} />
       <Text style={styles.serviceName}>{name}</Text>
-      </Center>
     </TouchableOpacity>
   );
 }
@@ -39,8 +34,8 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   gridColumn: {
-    width: 130,
-    height: 140,
+    width: 115,
+    height: 120,
     margin: 5,
     justifyContent: 'center',
     alignItems: 'center',
@@ -48,15 +43,15 @@ const styles = StyleSheet.create({
     overflow: 'hidden', // Clip the image to fit within the rounded corners
   },
   serviceImage: {
-    width: 70,
-    height: 70,
+    width: 60,
+    height: 60,
     resizeMode: 'contain', // Adjust the image size to fit within the TouchableOpacity
   },
   serviceName: {
     color: 'white',
     marginTop: 5,
     textAlign: 'center',
-    fontWeight: 'bold',
+    fontWeight: 'medium',
   },
   gridRow: {
     flexDirection: 'row',

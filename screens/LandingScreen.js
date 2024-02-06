@@ -56,7 +56,7 @@ export default function LandingScreen() {
           </View>
           {/* <Text style={tw`my-12`}>LandingScreen</Text> */}
 
-          <View style={tw` h-20  w-full`}>
+          <View style={tw` h-18  w-full`}>
           <View 
           // style={{ flexDirection: 'row', alignItems: 'center', paddingHorizontal: 16 }}
                 style={tw` w-10/12 mx-auto border flex-row  border-green-600 rounded-lg p-3 my-2 mt-4`}
@@ -74,10 +74,11 @@ export default function LandingScreen() {
 
           </View>
 
-          <View style={tw`h-64 w-full -mt-2`}>
+          <View style={tw`h-72 w-full -mt-2`}>
             <Categories  />
           </View>
-          <View style={tw`h-72 w-full my-3`}>
+
+          <View style={tw`h-64 w-full my-2`}>
 
           <ServiceList  />
           {/* <LandingTab  /> */}

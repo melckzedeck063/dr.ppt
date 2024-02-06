@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import { View, Text, Image, TouchableOpacity, FlatList, StyleSheet, TextInput, ProgressBarAndroid } from 'react-native';
 import tw from 'twrnc';
 import image1 from '../assets/images/image2.jpg';
@@ -8,18 +7,20 @@ import Slider from '@react-native-community/slider'; // Import Slider component
 import { Ionicons } from '@expo/vector-icons';
 import DateTimePickerModal from "react-native-modal-datetime-picker"; // Import DateTimePickerModal
 import DateTimePicker from '@react-native-community/datetimepicker';
+import { useState } from 'react';
+import RNPickerSelect from 'react-native-picker-select';
 
 const ServiceDetailScreen = ({ route }) => {
-    const { name, image, time, desc, category } = route.params;
+    const { name, image } = route.params;
 
     // State to track selected service item
     const [selectedItem, setSelectedItem] = useState(null);
 
     // State to track selected date and time
-    const [selectedDate, setSelectedDate] = useState(new Date()); // Initialize with today's date
-    const [selectedTime, setSelectedTime] = useState(new Date()); // Initialize with current time
-    const [isDatePickerVisible, setDatePickerVisibility] = useState(false); // State for date picker visibility
-    const [isTimePickerVisible, setTimePickerVisibility] = useState(false); // State for time picker visibility
+    const [selectedDate, setSelectedDate] = useState(new Date());
+    const [selectedTime, setSelectedTime] = useState(new Date());
+    const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+    const [isTimePickerVisible, setTimePickerVisibility] = useState(false);
 
     // State to track area for roof or exterior
     const [area, setArea] = useState(0);
@@ -31,22 +32,17 @@ const ServiceDetailScreen = ({ route }) => {
         { id: '3', label: 'Exterior', image: require('../assets/icons/cleaning.png') },
     ];
 
-
     const dataRooms = [
         { id: '1', label: 'Bedrooms' },
         { id: '2', label: 'Toilet' },
         { id: '3', label: 'Kitchen' },
-        // { id: '4', label: 'Windows' },
     ];
+    
 
     // Function to handle selection of a service item
-    const handleSelectItem = (item) => {
-        setSelectedItem(item);
-    };
 
     // Function to handle booking the service
     const handleBookService = () => {
-        // Logic to book the selected service with selected date and time
         console.log('Service booked!');
     };
 
@@ -56,13 +52,29 @@ const ServiceDetailScreen = ({ route }) => {
         setDatePickerVisibility(false);
     };
 
-    // Function to handle time selection
-    const handleTimeConfirm = (event, time) => {
-        if (event === 'set') {
-            setSelectedTime(time);
-        }
-        setTimePickerVisibility(false);
-    };
+
+    const handleTimeConfirm = (time) => {
+      setSelectedTime(time);
+      setTimePickerVisibility(false);
+  };
+  
+  // Function to handle click on any service item
+  const handleSelectItem = (item) => {
+      setSelectedItem(item);
+      
+      // Close time picker if open and an item is selected
+      if (item) {
+          setTimePickerVisibility(false);
+      }
+  };
+  
+  // Function to handle click on the time selection button
+  const handleTimeButtonPress = () => {
+      // Show time picker only if an item is selected
+      if (selectedItem) {
+          setTimePickerVisibility(true);
+      }
+  };
 
     return (
         <View>
@@ -78,7 +90,7 @@ const ServiceDetailScreen = ({ route }) => {
                         />
                     </View>
                     {/* Service Details */}
-                    <View style={tw`mb-3`}>
+                    <View style={tw`mb-4`}>
                         <Text style={tw`text-2xl ml-2 font-bold`}>{name}</Text>
                         <Center style={tw`text-gray-500 mt-1`} color="gray.700">
                             <Text style={tw`text-black`}>
@@ -92,44 +104,41 @@ const ServiceDetailScreen = ({ route }) => {
                         data={dataFourColumns}
                         numColumns={4}
                         renderItem={({ item }) => (
-                          <TouchableOpacity
-                          style={[styles.gridColumn, { backgroundColor: '#0B666A' }]}
-                          onPress={() => {
-                            // Handle onPress event
-                            console.log(`Service selected: ${item.serviceName}`);
-                          }}
-                        >
-                          <Image source={item.image} style={styles.serviceImage} />
-                          <Text style={styles.serviceName}>{item.label}</Text>
-                        </TouchableOpacity>
+                            <TouchableOpacity
+                                style={[styles.gridColumn, { backgroundColor: '#0B666A' }]}
+                                onPress={() => handleSelectItem(item)}
+                            >
+                                <Image source={item.image} style={styles.serviceImage} />
+                                <Text style={styles.serviceName}>{item.label}</Text>
+                            </TouchableOpacity>
                         )}
                     />
                     {/* Conditional rendering based on selected item */}
                     {selectedItem && (
-                        <View style={tw`p-3`}>
+                        <View style={tw`my-3`}>
                             {selectedItem.label === 'House' ? (
                                 // Contents for House
                                 <FlatList
                                     data={dataRooms}
                                     numColumns={4}
                                     renderItem={({ item }) => (
-                                      <View style={[styles.gridColumn, { backgroundColor: 'transparent' }, tw`mx-1`]}>
-                                      {/* Label name */}
-                                      <Text style={[tw`text-center font-bold text-gray-700 mb-2`, styles.label]}>{item.label}</Text>
-                                      {/* Card-like structure */}
-                                      <HStack space={[2, 3]} justifyContent="space-between" style={[styles.card, tw`border-2 border-gray-400 p-1 rounded-lg mx-1`]}>
-                                          {/* Minus button */}
-                                          <TouchableOpacity style={tw``}>
-                                              <Ionicons style={tw`mt-1 font-bold`} name="remove-outline" size={20} color="gray" />
-                                          </TouchableOpacity>
-                                          {/* Counter */}
-                                          <Text style={tw`mx-1 text-green-700 font-bold text-xl`}>0</Text>
-                                          {/* Plus button */}
-                                          <TouchableOpacity style={tw``}>
-                                              <Ionicons style={tw`mt-1 font-bold`} name="add-outline" size={20} color="orange" />
-                                          </TouchableOpacity>
-                                      </HStack>
-                                  </View>
+                                        <View style={[styles.gridColumn, { backgroundColor: 'transparent' }, tw`mx-1`]}>
+                                            {/* Label name */}
+                                            <Text style={[tw`text-center font-bold text-gray-700 mb-2`, styles.label]}>{item.label}</Text>
+                                            {/* Card-like structure */}
+                                            <HStack space={[2, 3]} justifyContent="space-between" style={[styles.card, tw`border-2 border-gray-400 p-1 rounded-lg mx-1`]}>
+                                                {/* Minus button */}
+                                                <TouchableOpacity style={tw``}>
+                                                    <Ionicons style={tw`mt-1 font-bold`} name="remove-outline" size={20} color="gray" />
+                                                </TouchableOpacity>
+                                                {/* Counter */}
+                                                <Text style={tw`mx-1 text-green-700 font-bold text-xl`}>0</Text>
+                                                {/* Plus button */}
+                                                <TouchableOpacity style={tw``}>
+                                                    <Ionicons style={tw`mt-1 font-bold`} name="add-outline" size={20} color="orange" />
+                                                </TouchableOpacity>
+                                            </HStack>
+                                        </View>
                                     )}
                                 />
                             ) : selectedItem.label === 'Roof' || selectedItem.label === 'Exterior' ? (
@@ -155,25 +164,25 @@ const ServiceDetailScreen = ({ route }) => {
                     <View style={tw`flex-row justify-between`}>
                         {/* Date selection */}
                         <TouchableOpacity onPress={() => setDatePickerVisibility(true)} style={tw`border-2 border-gray-300 p-2 rounded-md`}>
-                          <HStack space={[2,3]} justifyContent="space-between" >
-                            <Text style={tw`text-lg mx-1`} >{selectedDate.toLocaleDateString()}</Text>
-                            <Ionicons name="calendar-outline" size={24} color="black" />
-                          </HStack>
+                            <HStack space={[2, 3]} justifyContent="space-between">
+                                <Text style={tw`text-lg mx-1`}>{selectedDate.toLocaleDateString()}</Text>
+                                <Ionicons name="calendar-outline" size={24} color="black" />
+                            </HStack>
                         </TouchableOpacity>
                         {/* Time selection */}
-                        <TouchableOpacity onPress={() => setTimePickerVisibility(true)} style={tw`border-2 border-gray-300 p-2 rounded-md`}>
-                          <HStack space={[2,3]} justifyContent="space-between" >
-                            <Text style={tw`text-lg mx-1`} >{selectedTime.toLocaleTimeString()}</Text>
-                            <Ionicons name="time-outline" size={24} color="black" />
-                          </HStack>
-                        </TouchableOpacity>
+                        <TouchableOpacity  style={tw`border-2 border-gray-300 p-2 rounded-md`}>
+                            <HStack space={[2, 3]} justifyContent="space-between">
+                                <Text style={tw`text-lg mx-1`}>{selectedTime.toLocaleTimeString()}</Text>
+                                <Ionicons name="time-outline" size={24} color="black" />
+                            </HStack>
+                        </TouchableOpacity>                        
                     </View>
                     {/* Book service button */}
                     <TouchableOpacity
-                        style={tw`bg-blue-500 py-2 rounded-md mt-4`}
+                        style={[tw`bg-blue-500 py-2.5  rounded-md mt-4`, { backgroundColor: '#0B666A' }]}
                         onPress={handleBookService}
                     >
-                        <Text style={tw`text-white text-center`}>Book Service</Text>
+                        <Text style={tw`text-white font-medium text-lg text-center`}>Book Service</Text>
                     </TouchableOpacity>
                     {/* Date picker modal */}
                     <DateTimePickerModal
@@ -182,16 +191,7 @@ const ServiceDetailScreen = ({ route }) => {
                         onConfirm={handleDateConfirm}
                         onCancel={() => setDatePickerVisibility(false)}
                     />
-                    {/* Time picker modal */}
-                    <DateTimePicker
-                        isVisible={isTimePickerVisible}
-                        value={selectedTime}
-                        mode="time"
-                        is24Hour={true}
-                        display="default"
-                        onChange={handleTimeConfirm}
-                        
-                    />
+                    
                 </Box>
             </View>
         </View>
@@ -208,19 +208,15 @@ const styles = StyleSheet.create({
         borderRadius: 10,
     },
     serviceImage: {
-      width: 50,
-      height: 50,
-      resizeMode: 'contain', // Adjust the image size to fit within the TouchableOpacity
+        width: 50,
+        height: 50,
+        resizeMode: 'contain',
     },
     serviceName: {
-      color: 'white',
-      marginTop: 5,
-      textAlign: 'center',
-      fontWeight : 'medium',
-    },
-    gridRow: {
-      flexDirection: 'row',
-      marginBottom: 10,
+        color: 'white',
+        marginTop: 5,
+        textAlign: 'center',
+        fontWeight: 'medium',
     },
 });
 

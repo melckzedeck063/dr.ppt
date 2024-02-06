@@ -9,6 +9,7 @@ import image5 from '../assets/icons/shopping.png'
 import image6 from '../assets/icons/dry_cleaning.png'
 
 import ListItem from './ListItem';
+import CategoryItem from './CategoryItem';
 
 export default function ServiceList() {
   const data = [{
@@ -60,8 +61,8 @@ export default function ServiceList() {
 
   return (
     <Box width="100%" style={tw`w-full px-2`}>
-      <Heading fontSize="xl" p="2" pb="3" color="#016A70">
-        Available Services
+      <Heading fontSize="lg" p="1.5" pb="2" color="#016A70">
+        Popular Selected Services
       </Heading>
       <FlatList
   // style={{ width: '100%' }}
