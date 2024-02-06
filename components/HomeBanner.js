@@ -1,7 +1,10 @@
 import React from 'react';
 import { Box, HStack, VStack, Text, Pressable, Image,Container,Heading,Center } from 'native-base';
 import tw from 'twrnc';
-import image1 from '../assets/images/image1.jpg'
+import image1 from '../assets/images/housekeeping.gif'
+
+import image from '../assets/icons/cleaning.png';
+import { View } from 'react-native';
 
 export default function HomeBanner() {
   return (
@@ -10,22 +13,17 @@ export default function HomeBanner() {
         <HStack justifyContent="space-between">
           <Box justifyContent="space-between">
             <VStack space="2">
-              <Text fontSize="sm" color="white">
-                Welcome!
+              <Text style={tw`font-bold`} color="white" fontSize="xl">
+                Cleaning service in
               </Text>
-              <Text color="white" fontSize="xl">
-                Need our service today
+              <Text style={tw`-mt-2 font-bold`} color="white" fontSize="xl">
+                your hands
               </Text>
             </VStack>
-            <Pressable rounded="xs" bg="primary.500" alignSelf="flex-start" py="1" px="3">
-              <Text textTransform="uppercase" fontSize="sm" fontWeight="bold" color="white">
-                Book Now
-              </Text>
-            </Pressable>
           </Box>
-          <Image source={{
-          uri: 'https://media.vanityfair.com/photos/5ba12e6d42b9d16f4545aa19/3:2/w_1998,h_1332,c_limit/t-Avatar-The-Last-Airbender-Live-Action.jpg'
-        }} alt="Aang flying and surrounded by clouds" height="100" rounded="full" width="100" />
+          <View style={tw`h-18 w-18 rounded-full`}>
+           <Image style={tw`h-18 w-18 rounded-full`} source={image1} alt="Aang flying and surrounded by clouds" height="100" rounded="full" width="100" />
+          </View>
         </HStack>
       </Box>
   </Center>
