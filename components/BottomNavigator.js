@@ -66,10 +66,10 @@ export const LandingTab = () => {
       />
 
 <Tab.Screen
-        name="CartScreen"
+        name="Bookings"
         component={CartScreen}
         options={{
-          tabBarLabel: 'Cart',
+          tabBarLabel: 'Bookings',
           headerShown: false,
           tabBarIcon: ({ color, size }) => (
             <Icon name="cart" size={size} color={color} />

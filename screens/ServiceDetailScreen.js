@@ -9,12 +9,72 @@ import DateTimePickerModal from "react-native-modal-datetime-picker"; // Import 
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { useState } from 'react';
 import RNPickerSelect from 'react-native-picker-select';
+import { useNavigation } from '@react-navigation/native';
 
 const ServiceDetailScreen = ({ route }) => {
     const { name, image } = route.params;
 
     // State to track selected service item
+    const navigation =   useNavigation();
     const [selectedItem, setSelectedItem] = useState(null);
+    const [bedroomCount, setBedroomCount] = useState(0);
+const [kitchenCount, setKitchenCount] = useState(0);
+const [toiletCount, setToiletCount] = useState(0);
+
+// Define functions to increment and decrement item counts based on their labels
+const incrementItemCount = (label) => {
+    switch (label) {
+        case 'Bedrooms':
+            setBedroomCount(prevCount => prevCount + 1);
+            break;
+        case 'Kitchen':
+            setKitchenCount(prevCount => prevCount + 1);
+            break;
+        case 'Toilet':
+            setToiletCount(prevCount => prevCount + 1);
+            break;
+        default:
+            break;
+    }
+};
+
+const decrementItemCount = (label) => {
+    switch (label) {
+        case 'Bedrooms':
+            if (bedroomCount > 0) {
+                setBedroomCount(prevCount => prevCount - 1);
+            }
+            break;
+        case 'Kitchen':
+            if (kitchenCount > 0) {
+                setKitchenCount(prevCount => prevCount - 1);
+            }
+            break;
+        case 'Toilet':
+            if (toiletCount > 0) {
+                setToiletCount(prevCount => prevCount - 1);
+            }
+            break;
+        default:
+            break;
+    }
+};
+
+// Function to get the count based on the label
+const getCountByLabel = (label) => {
+    switch (label) {
+        case 'Bedrooms':
+            return bedroomCount;
+        case 'Kitchen':
+            return kitchenCount;
+        case 'Toilet':
+            return toiletCount;
+        default:
+            return 0;
+    }
+};
+
+
 
     // State to track selected date and time
     const [selectedDate, setSelectedDate] = useState(new Date());
@@ -39,13 +99,6 @@ const ServiceDetailScreen = ({ route }) => {
     ];
     
 
-    // Function to handle selection of a service item
-
-    // Function to handle booking the service
-    const handleBookService = () => {
-        console.log('Service booked!');
-    };
-
     // Function to handle date selection
     const handleDateConfirm = (date) => {
         setSelectedDate(date);
@@ -68,13 +121,13 @@ const ServiceDetailScreen = ({ route }) => {
       }
   };
   
-  // Function to handle click on the time selection button
-  const handleTimeButtonPress = () => {
-      // Show time picker only if an item is selected
-      if (selectedItem) {
-          setTimePickerVisibility(true);
-      }
-  };
+  const handleBookService = (bedroomCount, kitchenCount, toiletCount) => {
+    console.log('Service booked with counts - Bedrooms:', bedroomCount, 'Kitchen:', kitchenCount, 'Toilets:', toiletCount);
+
+    setTimeout(() => {
+        navigation.navigate('Booking')
+    }, 2000);
+};
 
     return (
         <View>
@@ -118,29 +171,29 @@ const ServiceDetailScreen = ({ route }) => {
                         <View style={tw`my-3`}>
                             {selectedItem.label === 'House' ? (
                                 // Contents for House
-                                <FlatList
-                                    data={dataRooms}
-                                    numColumns={4}
-                                    renderItem={({ item }) => (
-                                        <View style={[styles.gridColumn, { backgroundColor: 'transparent' }, tw`mx-1`]}>
-                                            {/* Label name */}
-                                            <Text style={[tw`text-center font-bold text-gray-700 mb-2`, styles.label]}>{item.label}</Text>
-                                            {/* Card-like structure */}
-                                            <HStack space={[2, 3]} justifyContent="space-between" style={[styles.card, tw`border-2 border-gray-400 p-1 rounded-lg mx-1`]}>
-                                                {/* Minus button */}
-                                                <TouchableOpacity style={tw``}>
-                                                    <Ionicons style={tw`mt-1 font-bold`} name="remove-outline" size={20} color="gray" />
-                                                </TouchableOpacity>
-                                                {/* Counter */}
-                                                <Text style={tw`mx-1 text-green-700 font-bold text-xl`}>0</Text>
-                                                {/* Plus button */}
-                                                <TouchableOpacity style={tw``}>
-                                                    <Ionicons style={tw`mt-1 font-bold`} name="add-outline" size={20} color="orange" />
-                                                </TouchableOpacity>
-                                            </HStack>
-                                        </View>
-                                    )}
-                                />
+<FlatList
+    data={dataRooms}
+    numColumns={4}
+    renderItem={({ item }) => (
+        <View style={[styles.gridColumn, { backgroundColor: 'transparent' }, tw`mx-1`]}>
+            {/* Label name */}
+            <Text style={[tw`text-center font-bold text-gray-700 mb-2`, styles.label]}>{item.label}</Text>
+            {/* Card-like structure */}
+            <HStack space={[2, 3]} justifyContent="space-between" style={[styles.card, tw`border-2 border-gray-400 p-1 rounded-lg mx-1`]}>
+                {/* Minus button */}
+                <TouchableOpacity onPress={() => decrementItemCount(item.label)} style={tw``}>
+                    <Ionicons style={tw`mt-1 font-bold`} name="remove-outline" size={20} color="gray" />
+                </TouchableOpacity>
+                {/* Counter */}
+                <Text style={tw`mx-1 text-green-700 font-bold text-xl`}>{getCountByLabel(item.label)}</Text>
+                {/* Plus button */}
+                <TouchableOpacity onPress={() => incrementItemCount(item.label)} style={tw``}>
+                    <Ionicons style={tw`mt-1 font-bold`} name="add-outline" size={20} color="orange" />
+                </TouchableOpacity>
+            </HStack>
+        </View>
+    )}
+/>
                             ) : selectedItem.label === 'Roof' || selectedItem.label === 'Exterior' ? (
                                 // Contents for Roof or Exterior
                                 <View style={tw`items-center`}>
@@ -180,7 +233,7 @@ const ServiceDetailScreen = ({ route }) => {
                     {/* Book service button */}
                     <TouchableOpacity
                         style={[tw`bg-blue-500 py-2.5  rounded-md mt-4`, { backgroundColor: '#0B666A' }]}
-                        onPress={handleBookService}
+                        onPress={() => handleBookService(bedroomCount, kitchenCount, toiletCount)}
                     >
                         <Text style={tw`text-white font-medium text-lg text-center`}>Book Service</Text>
                     </TouchableOpacity>
